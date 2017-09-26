@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr"  
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+   <f:view encoding="UTF-8">
+   
+    <h:head>
+        <title>#{msg.title}</title>
+    </h:head>
+    
+    <h:body>
+		<h2><h:outputText value="#{msg.welcome}" /></h2>
+		
+		<h:outputFormat  value="#{msg['current.score']}">
+			<f:param value="#{quiz.score}" />
+		</h:outputFormat>
+		 
+		<p><h:outputText value="#{msg['guess.message']}"/></p>
+		 
+		<p><h:outputText value="#{quiz.current.sequence}" /></p>
+		
+		<p></p>
+		 <h:form>
+		 	<h:outputLabel for="answer"> Votre réponse : </h:outputLabel>	
+		 	<h:inputText id="answer" value="#{quiz.answer}" >
+		 		<f:ajax event="change" render="answerMessage" />
+		 		<f:validator binding="#{numValid}" />	
+		 	</h:inputText>	  
+		 	<h:message for="answer"  id="answerMessage" style="color: red;" /><br/>
+		 	
+		 	<p><h:commandButton value="#{msg.next}" action="#{quiz.verifAnswer}"/>  </p>
+		 	
+		 </h:form>    
+			<h:messages id="bien" style="color:green;" globalOnly="true" />
+		
+    </h:body>
+    </f:view>
+</html>
