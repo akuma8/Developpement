@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   
+<ui:composition template="layout.xhtml">
+    
+    <ui:define name="content">
+        <h:form id="form">
+        
+            <p:panel header="Products List">
+                <p:dataTable id="table" var="product" value="#{productList.products}">
+                    <p:column>
+                        <f:facet name="header"># Id</f:facet>
+                        <h:outputText value="#{product.id}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{product.name}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Price</f:facet>
+                        <h:outputText value="#{product.price}">
+                            <f:convertNumber type="currency" currencySymbol="€ " />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+    
+</html>

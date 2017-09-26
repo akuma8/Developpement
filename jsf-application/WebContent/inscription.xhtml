@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+ 
+  <f:view encoding="UTF-8" locale="fr">
+  
+    <h:head>
+        <title>Inscription</title>
+        <h:outputStylesheet name="default/css/form.css" />
+<!--         <f:loadBundle var="msg"  basename="/bundle/messages"/>  -->
+        
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </h:head>
+   
+    <h:body>
+    
+    	<h1>Formulaire d'inscription</h1>
+    	<h:form id="formulaire" enctype="multipart/form-data"> 
+    		<fieldset>
+		    		<legend>Inscription</legend>
+		    		<h:outputLabel for="email">Adresse email : <span class="requis">*</span></h:outputLabel>
+		    			<h:inputText id="email"  value="#{inscrireBean.utilisateur.email}" size="20" maxlength="60" label="Email" >
+		    				<f:ajax event="blur" render="emailMessage"></f:ajax>
+		    				<!-- On fait appel au validator définit coté back, voir la classe : fr.chicowa.jsf.validators.ExistenceEmailValidator -->
+		    				<f:validator binding="#{existenceEmailValidator}"/>
+		    			</h:inputText>
+		    			<h:message for="email" id="emailMessage" errorClass="erreur"/> 
+		    		<br/>
+		    
+		    		<h:outputLabel for="motdepasse">Mot de passe <span class="requis">*</span></h:outputLabel>
+			            <h:inputSecret id="motdepasse" value="#{inscrireBean.utilisateur.motDePasse}"  size="20" maxlength="20" label="Mot de passe" binding="#{composantMDP}" >
+			             	<f:ajax event="blur" execute="motdepasse confirmation" render="motDePasseMessage confirmationMessage" />
+           				</h:inputSecret>
+			            <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
+		            <br />
+		    
+		    		<h:outputLabel for="confirmation">Confirmation du mot de passe <span class="requis">* </span></h:outputLabel>
+			            <h:inputSecret id="confirmation" value="#{inscrireBean.utilisateur.motDePasse}"  size="20" maxlength="20" label="Confirmation mot de passe" >
+			           		<f:ajax event="blur" execute="motdepasse confirmation"  render="motDePasseMessage confirmationMessage"></f:ajax>
+<!-- 			           		On déclare comme attribut le composant mot de passe dans le composant comfirmation -->
+			           		<f:attribute name="composantMDP" value="#{composantMDP}" />
+			           		<f:validator validatorId="mdp-validator"/>
+			            </h:inputSecret>
+			            <h:message id="confirmationMessage" for="confirmation" errorClass="erreur" />
+		            <br />
+		            
+		            <h:outputLabel for="nom">Nom d'utilisateur <span class="requis"> * </span></h:outputLabel>
+			            <h:inputText id="nom" value="#{inscrireBean.utilisateur.nom}"  size="20" maxlength="20" label="Nom utilisateur">
+			            	<f:ajax event="blur" render="nomMessage"></f:ajax>
+			            </h:inputText>
+			            <h:message id="nomMessage" for="nom" errorClass="erreur" />
+		            <br />
+		            
+		            <h:messages globalOnly="true" infoClass="info"/>
+		    
+		    		<h:commandButton value="Inscription" action="#{inscrireBean.inscrire}" styleClass="sansLabel">
+		    			<f:ajax execute="@form" render="@form"></f:ajax>
+		    		</h:commandButton><br/>
+		    </fieldset>
+    	</h:form>
+    	
+    	
+    	<div class="ui-g">
+            <div class="ui-g-12">
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:button href="/" value="List of Products" />
+                        <p:button href="/product" value="New Product" />
+                    </f:facet>
+                </p:toolbar>
+            </div>
+            <div class="ui-g-12">
+                <ui:insert name="content" />
+            </div>
+        </div>
+    	
+    </h:body>
+  </f:view>   
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+  
+    <h:head>
+        <title>Inscription</title>
+        <link rel="stylesheet" type="text/css" href="resources/default/css/form.css"/>
+        <f:loadBundle var="msg" basename="fr.chicowa.jsf.bundle.messages"/>
+    </h:head> 
+   
+    <h:body>
+    	<h1>Formulaire d'inscription</h1>
+    	
+    	<h:form id="formulaire"> 
+    		<fieldset>
+		    		<legend>Inscription</legend>
+		    		<h:outputLabel for="email">Adresse email : <span class="requis">*</span></h:outputLabel>
+		    			<h:inputText id="email"  value="#{inscrireBean.utilisateur.email}"  required="true" size="20" maxlength="60" label="Email" requiredMessage="#{msg.inscription.email}"/>
+		    			<h:message for="email" id="emailMessage" errorClass="erreur"/> 
+		    		<br/> 
+		    
+		    		<h:outputLabel for="motdepasse">Mot de passe <span class="requis">*</span></h:outputLabel>
+			            <h:inputSecret id="motdepasse" value="#{inscrireBean.utilisateur.motDePasse}" required="true" size="20" maxlength="20" label="Mot de passe" requiredMessage="Veuillez saisir un mot de passe"/>
+			            <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
+		            <br />
+		    
+		    		<h:outputLabel for="confirmation">Confirmation du mot de passe <span class="requis">* </span></h:outputLabel>
+			            <h:inputSecret id="confirmation" value="#{inscrireBean.utilisateur.motDePasse}" required="true" size="20" maxlength="20" label="Confirmation mot de passe"/>
+			            <h:message id="confirmationMessage" for="confirmation" errorClass="erreur" />
+		            <br />
+		            
+		            <h:outputLabel for="nom">Nom d'utilisateur <span class="requis"> * </span></h:outputLabel>
+			            <h:inputText id="nom" value="#{inscrireBean.utilisateur.nom}" required="true" size="20" maxlength="20" label="Nom utilisateur" requiredMessage="Vezuillez saisir un nom d'utilisateur"/>
+			            <h:message id="nomMessage" for="nom" errorClass="erreur" />
+		            <br />
+		            
+		            <h:messages globalOnly="true" infoClass="info"/>
+		    
+		    		<h:commandButton value="Inscription" action="#{inscrireBean.inscrire}" styleClass="sansLabel"/><br/>
+		    </fieldset>
+    	</h:form>
+    	
+    </h:body>
+    
+</html>

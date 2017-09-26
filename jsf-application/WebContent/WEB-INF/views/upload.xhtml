@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+  
+    <h:head>
+        <title>Inscription</title>
+        <link rel="stylesheet" type="text/css" href="resources/default/css/form.css"/>
+        <f:loadBundle var="msg"  basename="fr.chicowa.jsf.bundle.messages"/> 
+    </h:head>
+   
+    <h:body>
+    	<h1>Formulaire d'inscription</h1>
+    	
+    	<h:form id="formulaire" enctype="multipart/form-data"> 
+    		<fieldset>
+		    	<legend>Envoi de fichier</legend>
+
+                <h:outputLabel for="description">Description du fichier</h:outputLabel>
+                <h:inputText id="description" value="#{uploadBean.fichier.description}"/>
+                <h:message id="descriptionMessage" for="description" errorClass="erreur" />
+                <br />
+
+
+                <h:outputLabel for="fichier">Emplacement du fichier <span class="requis">*</span></h:outputLabel>
+                <p:inputFileUpload id="fichier" value="#{uploadBean.fichier.contenu}" />
+                <h:message id="fichierMessage" for="fichier" errorClass="erreur" />
+                <br />
+
+                <h:messages globalOnly="true" infoClass="info" />
+
+                <h:commandButton value="Envoyer" action="#{uploadBean.envoyer}" styleClass="sansLabel"/>
+                <br />
+		    </fieldset>
+    	</h:form>
+    	
+    </h:body>
+    
+</html>

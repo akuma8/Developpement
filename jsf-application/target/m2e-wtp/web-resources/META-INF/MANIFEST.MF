@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: jsf-application
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: aahamadi
+Implementation-Vendor-Id: jsf-application
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://projects.spring.io/spring-boot/jsf-applicat
+ ion/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
